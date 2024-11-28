@@ -7,6 +7,7 @@
 import attribute_controller as ac
 import element_controller as ec
 import file_controller as fc
+import utility_controller as uc
 
 active_elements = ec.get_active_identifiable_element_ids()
 
@@ -28,9 +29,12 @@ for element in active_elements:
     else:
         production_number_count_map[production_number] += 1
 
-for production_number in production_number_element_map:
-    fc.export_step_file([production_number_element_map[production_number]],
-                        f'{production_number}_{production_number_count_map[production_number]}.step',
-                        1000,
-                        214,
-                        True)
+destination_folder = uc.get_user_path_from_dialog()
+
+if destination_folder:
+    for production_number in production_number_element_map:
+        fc.export_step_file_extrude_drillings([production_number_element_map[production_number]],
+                                              f'{production_number}_{production_number_count_map[production_number]}.step',
+                                              1000,
+                                              214,
+                                              True)
