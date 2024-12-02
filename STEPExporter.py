@@ -33,8 +33,10 @@ destination_folder = uc.get_user_path_from_dialog()
 
 if destination_folder:
     for production_number in production_number_element_map:
+        filename = destination_folder + '/' + f'{production_number}_{production_number_count_map[production_number]}.step'
         fc.export_step_file_extrude_drillings([production_number_element_map[production_number]],
-                                              f'{production_number}_{production_number_count_map[production_number]}.step',
+                                              filename,
                                               1000,
                                               214,
-                                              True)
+                                              True,
+                                              False)
